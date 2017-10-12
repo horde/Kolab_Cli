@@ -9,7 +9,6 @@
  * @package  Kolab_Cli
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
- * @link     http://pear.horde.org/index.php?package=Kolab_Cli
  */
 
 /**
@@ -25,7 +24,6 @@
  * @package  Kolab_Cli
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
- * @link     http://pear.horde.org/index.php?package=Kolab_Cli
  */
 interface Horde_Kolab_Cli_Module
 extends Horde_Cli_Modular_Module
