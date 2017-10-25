@@ -7,3 +7,37 @@ description: >
   backend. The primary focus is dealing with the data stored in IMAP.
 list: dev
 type: library
+homepage: https://www.horde.org/libraries/Horde_Kolab_Cli
+authors:
+  -
+    name: Gunnar Wrobel
+    user: wrobel
+    email: p@rdus.de
+    active: true
+    role: lead
+version:
+  release: 1.0.0beta1
+  api: 1.0.0
+state:
+  release: alpha
+  api: alpha
+license:
+  identifier: LGPL-2.1
+  uri: http://www.horde.org/licenses/lgpl21
+dependencies:
+  required:
+    php: ^5.3 || ^7
+    pear:
+      pear.horde.org/Horde_Autoloader: ^2
+      pear.horde.org/Horde_Cli: ^2
+      pear.horde.org/Horde_Cli_Modular: ^2
+      pear.horde.org/Horde_Imap_Client: ^2
+      pear.horde.org/Horde_Kolab_Storage: ^2
+      pear.horde.org/Horde_Log: ^2
+      pear.horde.org/Horde_Translation: ^2.2
+      pear.horde.org/Horde_Util: ^2
+  optional:
+    pear:
+      pear.horde.org/Horde_Support: ^2
+      pear.horde.org/Horde_Test: ^2.1
+      pear.horde.org/Horde_Yaml: ^2
