@@ -1,0 +1,28 @@
+---------------
+v1.0.0beta1-git
+---------------
+
+[jan] Mark PHP 7 as supported.
+[jan] Fix issues with certain locales like Turkish.
+[jan] Add Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
+
+
+------------
+v1.0.0alpha3
+------------
+
+First alpha release for Horde 5.
+
+
+------------
+v1.0.0alpha2
+------------
+
+[jan] Add Spanish translation (Manuel P. Ayala <mayala@unex.es>).
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.

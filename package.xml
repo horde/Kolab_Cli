@@ -10,7 +10,7 @@
   <email>p@rdus.de</email>
   <active>yes</active>
  </lead>
- <date>2017-10-20</date>
+ <date>2017-10-27</date>
  <version>
   <release>1.0.0beta1</release>
   <api>1.0.0</api>
@@ -37,6 +37,7 @@
     <dir name="Horde">
      <dir name="Kolab">
       <dir name="Cli">
+       <file name="CHANGES" role="doc" />
        <file name="TODO.rst" role="doc" />
       </dir> <!-- /doc/Horde/Kolab/Cli -->
      </dir> <!-- /doc/Horde/Kolab -->
@@ -232,6 +233,7 @@
  <phprelease>
   <filelist>
    <install as="horde-kolab-cli" name="bin/horde-kolab-cli" />
+   <install as="CHANGES" name="doc/Horde/Kolab/Cli/CHANGES" />
    <install as="TODO.rst" name="doc/Horde/Kolab/Cli/TODO.rst" />
    <install as="Horde/Kolab/Cli.php" name="lib/Horde/Kolab/Cli.php" />
    <install as="Horde/Kolab/Cli/Data/Ledger.php" name="lib/Horde/Kolab/Cli/Data/Ledger.php" />
@@ -320,7 +322,7 @@
    <stability>
     <release>alpha</release>
     <api>alpha</api></stability>
-   <date>2017-10-20</date>
+   <date>2017-10-27</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * [jan] Mark PHP 7 as supported.
