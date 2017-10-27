@@ -1,5 +1,5 @@
 {
-    "name": "horde/horde-kolab-cli",
+    "name": "horde/kolab-cli",
     "description": "A command line interface to the Kolab storage system",
     "type": "library",
     "homepage": "https://pear.horde.org",
