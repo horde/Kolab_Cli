@@ -1,7 +1,7 @@
 {
-    "name": "horde/kolab-cli",
+    "name": "horde/kolab_cli",
     "description": "Kolab storage command line interface library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Kolab_Cli",
     "license": "LGPL-2.1",
     "authors": [
@@ -12,36 +12,36 @@
         }
     ],
     "version": "1.0.0beta1",
-    "time": "2017-11-11",
+    "time": "2020-10-27",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "dev-master",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Autoloader": "^2",
-        "pear-pear.horde.org/Horde_Cli": "^2",
-        "pear-pear.horde.org/Horde_Cli_Modular": "^2",
-        "pear-pear.horde.org/Horde_Imap_Client": "^2",
-        "pear-pear.horde.org/Horde_Kolab_Storage": "^2",
-        "pear-pear.horde.org/Horde_Log": "^2",
-        "pear-pear.horde.org/Horde_Translation": "^2.2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/autoloader": "dev-master",
+        "horde/cli": "dev-master",
+        "horde/cli_modular": "dev-master",
+        "horde/imap_client": "dev-master",
+        "horde/kolab_storage": "dev-master",
+        "horde/log": "dev-master",
+        "horde/translation": "dev-master",
+        "horde/util": "dev-master"
     },
     "suggest": {
-        "pear-pear.horde.org/Horde_Support": "^2",
-        "pear-pear.horde.org/Horde_Test": "^2.1",
-        "pear-pear.horde.org/Horde_Yaml": "^2"
-    },
-    "replace": {
-        "pear-pear.horde.org/Horde_Kolab_Cli": "1.*",
-        "pear-horde/Horde_Kolab_Cli": "1.*"
+        "horde/support": "^2",
+        "horde/test": "^2.1",
+        "horde/yaml": "^2"
     },
     "autoload": {
         "psr-0": {
             "Horde_Kolab_Cli": "lib/"
         }
-    }
+    },
+    "bin": [
+        "bin/horde-kolab-cli"
+    ]
 }
