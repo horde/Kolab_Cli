@@ -258,8 +258,8 @@ implements Horde_Kolab_Cli_Module
     private function _yamlOutput($cli, $id, $output)
     {
         $output = $this->_convertDates($output);
-        if (class_exists('Horde_Yaml')) {
-            $this->_messageOutput($cli, $id, Horde_Yaml::dump($output));
+        if (class_exists(\Horde\Yaml\Yaml::class)) {
+            $this->_messageOutput($cli, $id, \Horde\Yaml\Yaml::dump($output));
         } else {
             $this->_messageOutput($cli, $id, print_r($output, true));
         }

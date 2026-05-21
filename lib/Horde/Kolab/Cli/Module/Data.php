@@ -193,11 +193,11 @@ implements Horde_Kolab_Cli_Module
             $data = $world['storage']->getData($folder_name, $arguments[3]);
             switch (Horde_String::lower($arguments[4])) {
             case 'yaml':
-                if (class_exists('Horde_Yaml')) {
-                    $object = Horde_Yaml::loadFile($arguments[5]);
+                if (class_exists(\Horde\Yaml\Yaml::class)) {
+                    $object = \Horde\Yaml\Yaml::loadFile($arguments[5]);
                 } else {
                     throw new Horde_Kolab_Cli_Exception(
-                        'The Horde_Yaml package is missing!'
+                        'The horde/yaml package is missing!'
                     );
                 }
             }
@@ -249,8 +249,8 @@ implements Horde_Kolab_Cli_Module
     private function _yamlOutput($cli, $id, $output)
     {
         $output = $this->_convertDates($output);
-        if (class_exists('Horde_Yaml')) {
-            $this->_messageOutput($cli, $id, Horde_Yaml::dump($output));
+        if (class_exists(\Horde\Yaml\Yaml::class)) {
+            $this->_messageOutput($cli, $id, \Horde\Yaml\Yaml::dump($output));
         } else {
             $this->_messageOutput($cli, $id, print_r($output, true));
         }
