@@ -151,8 +151,8 @@ implements Horde_Kolab_Cli_Module
                 $data = $parser->load($xml);
                 $id = $arguments[3] . ':' . $arguments[4] . '[' . $arguments[5] . ']';
             }
-            if (class_exists('Horde_Yaml')) {
-                $this->_formatOutput($cli, $id, Horde_Yaml::dump($data));
+            if (class_exists(\Horde\Yaml\Yaml::class)) {
+                $this->_formatOutput($cli, $id, \Horde\Yaml\Yaml::dump($data));
             } else {
                 $this->_formatOutput($cli, $id, print_r($data, true));
             }
