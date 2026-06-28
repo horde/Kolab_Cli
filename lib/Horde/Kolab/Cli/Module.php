@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module:: interface describes the module structure for
  * Kolab_Cli.
@@ -15,7 +16,7 @@
  * The Horde_Kolab_Cli_Module:: interface describes the module structure for
  * Kolab_Cli.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -25,8 +26,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-interface Horde_Kolab_Cli_Module
-extends Horde_Cli_Modular_Module
+interface Horde_Kolab_Cli_Module extends Horde_Cli_Modular_Module
 {
     /**
      * Handle the options and arguments.

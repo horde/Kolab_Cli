@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_List:: handles folder lists.
  *
@@ -13,7 +14,7 @@
 /**
  * The Horde_Kolab_Cli_Module_List:: handles folder lists.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -23,8 +24,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_List
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_List implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -56,7 +56,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -96,7 +96,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -108,9 +108,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -130,85 +128,85 @@ implements Horde_Kolab_Cli_Module
             $action = $arguments[1];
         }
         switch ($action) {
-        case 'folders':
-            $folders = $world['storage']->getList()->listFolders();
-            foreach ($folders as $folder) {
-                $cli->writeln($folder);
-            }
-            break;
-        case 'types':
-            $types = $world['storage']->getList()
-                ->getQuery()
-                ->listTypes();
-            if (!empty($types)) {
-                $pad = max(array_map('strlen', array_keys($types))) + 2;
-                foreach ($types as $folder => $type) {
-                    $cli->writeln(Horde_String::pad($folder . ':', $pad) . $type);
+            case 'folders':
+                $folders = $world['storage']->getList()->listFolders();
+                foreach ($folders as $folder) {
+                    $cli->writeln($folder);
                 }
-            }
-            break;
-        case 'type':
-            if (!isset($arguments[2])) {
-                throw new Horde_Kolab_Cli_Exception('You must provide a TYPE argument!');
-            }
-            $type = $arguments[2];
-            $folders = $world['storage']->getList()
-                ->getQuery()
-                ->listByType($type);
-            foreach ($folders as $folder) {
-                $cli->writeln($folder);
-            }
-            break;
-        case 'owners':
-            $owners = $world['storage']->getList()
-                ->getQuery()
-                ->listOwners();
-            if (!empty($owners)) {
-                $pad = max(array_map('strlen', array_keys($owners))) + 2;
-                foreach ($owners as $folder => $owner) {
-                    $cli->writeln(Horde_String::pad($folder . ':', $pad) . $owner);
-                }
-            }
-            break;
-        case 'defaults':
-            $defaults = $world['storage']->getList()
-                ->getQuery()
-                ->listDefaults();
-            if (!empty($defaults)) {
-                foreach ($defaults as $owner => $folders) {
-                    $cli->writeln('User "' . $owner . '":');
-                    $cli->writeln();
-                    foreach ($folders as $type => $folder) {
-                        $cli->writeln('  ' . Horde_String::pad($type . ':', 14) . $folder);
+                break;
+            case 'types':
+                $types = $world['storage']->getList()
+                    ->getQuery()
+                    ->listTypes();
+                if (!empty($types)) {
+                    $pad = max(array_map('strlen', array_keys($types))) + 2;
+                    foreach ($types as $folder => $type) {
+                        $cli->writeln(Horde_String::pad($folder . ':', $pad) . $type);
                     }
-                    $cli->writeln();
                 }
-            }
-            break;
-        case 'aclsupport':
-            if ($world['storage']->getList()
-                ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
-                ->hasAclSupport()) {
-                echo "The remote server supports ACL.\n";
-            } else {
-                echo "The remote server does not support ACL.\n";
-            }
-            break;
-        case 'namespaces':
-            $cli->writeln((string)$world['storage']->getList()->getNamespace());
-            break;
-        case 'sync':
-            $folders = $world['storage']->getList()->synchronize();
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+                break;
+            case 'type':
+                if (!isset($arguments[2])) {
+                    throw new Horde_Kolab_Cli_Exception('You must provide a TYPE argument!');
+                }
+                $type = $arguments[2];
+                $folders = $world['storage']->getList()
+                    ->getQuery()
+                    ->listByType($type);
+                foreach ($folders as $folder) {
+                    $cli->writeln($folder);
+                }
+                break;
+            case 'owners':
+                $owners = $world['storage']->getList()
+                    ->getQuery()
+                    ->listOwners();
+                if (!empty($owners)) {
+                    $pad = max(array_map('strlen', array_keys($owners))) + 2;
+                    foreach ($owners as $folder => $owner) {
+                        $cli->writeln(Horde_String::pad($folder . ':', $pad) . $owner);
+                    }
+                }
+                break;
+            case 'defaults':
+                $defaults = $world['storage']->getList()
+                    ->getQuery()
+                    ->listDefaults();
+                if (!empty($defaults)) {
+                    foreach ($defaults as $owner => $folders) {
+                        $cli->writeln('User "' . $owner . '":');
+                        $cli->writeln();
+                        foreach ($folders as $type => $folder) {
+                            $cli->writeln('  ' . Horde_String::pad($type . ':', 14) . $folder);
+                        }
+                        $cli->writeln();
+                    }
+                }
+                break;
+            case 'aclsupport':
+                if ($world['storage']->getList()
+                    ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
+                    ->hasAclSupport()) {
+                    echo "The remote server supports ACL.\n";
+                } else {
+                    echo "The remote server does not support ACL.\n";
+                }
+                break;
+            case 'namespaces':
+                $cli->writeln((string) $world['storage']->getList()->getNamespace());
+                break;
+            case 'sync':
+                $folders = $world['storage']->getList()->synchronize();
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 }

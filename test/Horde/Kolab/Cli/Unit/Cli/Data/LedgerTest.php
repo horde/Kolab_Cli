@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test the ledger data handler.
  *
@@ -22,9 +23,9 @@
  * @subpackage UnitTests
  * @author     Gunnar Wrobel <wrobel@pardus.de>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
-class Horde_Kolab_Cli_Unit_Cli_Data_LedgerTest
-extends Horde_Kolab_Cli_TestCase
+class Horde_Kolab_Cli_Unit_Cli_Data_LedgerTest extends Horde_Kolab_Cli_TestCase
 {
     public function testCountEmpty()
     {

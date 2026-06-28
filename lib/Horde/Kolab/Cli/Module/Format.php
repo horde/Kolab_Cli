@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_Format:: handles the Kolab format.
  *
@@ -13,7 +14,7 @@
 /**
  * The Horde_Kolab_Cli_Module_Format:: handles the Kolab format.
  *
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -23,8 +24,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Format
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Format implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -53,7 +53,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -93,7 +93,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -105,9 +105,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -127,45 +125,45 @@ implements Horde_Kolab_Cli_Module
             $action = $arguments[1];
         }
         switch ($action) {
-        case 'read':
-            $parser = $world['format']->create('Xml', $arguments[2]);
-            if (empty($arguments[4])) {
-                if (file_exists($arguments[3])) {
-                    $contents = file_get_contents($arguments[3]);
-                    $data = $parser->load($contents);
-                    $id = $arguments[3];
+            case 'read':
+                $parser = $world['format']->create('Xml', $arguments[2]);
+                if (empty($arguments[4])) {
+                    if (file_exists($arguments[3])) {
+                        $contents = file_get_contents($arguments[3]);
+                        $data = $parser->load($contents);
+                        $id = $arguments[3];
+                    } else {
+                        $cli->message(
+                            sprintf(
+                                Horde_Kolab_Cli_Translation::t('%s is no local file!'),
+                                $arguments[3]
+                            ),
+                            'cli.error'
+                        );
+                    }
                 } else {
-                    $cli->message(
-                        sprintf(
-                            Horde_Kolab_Cli_Translation::t('%s is no local file!'),
-                            $arguments[3]
-                        ),
-                        'cli.error'
-                    );
+                    $ks_data = $world['storage']->getData($arguments[3]);
+                    $part = $ks_data->fetchPart($arguments[4], $arguments[5]);
+                    rewind($part);
+                    $xml = quoted_printable_decode(stream_get_contents($part));
+                    $data = $parser->load($xml);
+                    $id = $arguments[3] . ':' . $arguments[4] . '[' . $arguments[5] . ']';
                 }
-            } else {
-                $ks_data = $world['storage']->getData($arguments[3]);
-                $part = $ks_data->fetchPart($arguments[4], $arguments[5]);
-                rewind($part);
-                $xml = quoted_printable_decode(stream_get_contents($part));
-                $data = $parser->load($xml);
-                $id = $arguments[3] . ':' . $arguments[4] . '[' . $arguments[5] . ']';
-            }
-            if (class_exists(\Horde\Yaml\Yaml::class)) {
-                $this->_formatOutput($cli, $id, \Horde\Yaml\Yaml::dump($data));
-            } else {
-                $this->_formatOutput($cli, $id, print_r($data, true));
-            }
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+                if (class_exists(Horde\Yaml\Yaml::class)) {
+                    $this->_formatOutput($cli, $id, Horde\Yaml\Yaml::dump($data));
+                } else {
+                    $this->_formatOutput($cli, $id, print_r($data, true));
+                }
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 

@@ -9,8 +9,7 @@ list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Kolab_Cli
 authors:
-  -
-    name: Gunnar Wrobel
+  - name: Gunnar Wrobel
     user: wrobel
     email: p@rdus.de
     active: true
@@ -41,3 +40,50 @@ dependencies:
       horde/support: ^3
       horde/test: ^3
       horde/yaml: ^3
+keywords: null
+vendor: horde
+ci-platform:
+  '8.0':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.1':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.2':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.3':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.4':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.5':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+  '8.6':
+    - php: ^7.4 || ^8
+    - composer-plugin-api: ~2.0
+    - ext-dom
+    - ext-hash
+    - ext-json
+ci-platform-flags:
+  needs_installer_plugin: false

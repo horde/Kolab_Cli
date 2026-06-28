@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -19,8 +20,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Data
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Data implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -54,7 +54,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -94,7 +94,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -106,9 +106,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -133,105 +131,105 @@ implements Horde_Kolab_Cli_Module
             $folder_name = $arguments[2];
         }
         switch ($action) {
-        case 'info':
-            break;
-        case 'synchronize':
-            $world['storage']->getData($folder_name, $arguments[3])->synchronize();
-            break;
-        case 'stamp':
-            $cli->writeln(
-                (string)$world['storage']->getData($folder_name)->getStamp()
-            );
-            break;
-        case 'complete':
-            $data = $world['storage']->getData($folder_name);
-            $complete = $data->fetchComplete($arguments[3]);
-            $cli->writeln($complete[1]->toString(array('headers' => $complete[0])));
-            break;
-        case 'part':
-            $data = $world['storage']->getData($folder_name);
-            $part = $data->fetchPart($arguments[3], $arguments[4]);
-            rewind($part);
-            $cli->writeln(quoted_printable_decode(stream_get_contents($part)));
-            break;
-        case 'fetch':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $objects = $data->fetch(explode(',', $arguments[4]));
-            foreach ($objects as $uid => $message) {
-                $this->_yamlOutput($cli, $uid, $message);
-            }
-            break;
-        case 'ids':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            foreach ($data->getObjectIds() as $id) {
-                $cli->writeln((string)$id);
-            }
-            break;
-        case 'objects':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            foreach ($data->getObjects() as $id => $object) {
-                $this->_yamlOutput($cli, $id, $object);
-            }
-            break;
-        case 'backendobjects':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            foreach ($data->getObjectsByBackendId() as $id => $object) {
-                $this->_yamlOutput($cli, $id, $object);
-            }
-            break;
-        case 'object':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $object = $data->getObject($arguments[4]);
-            $this->_yamlOutput($cli, $arguments[4], $object);
-            break;
-        case 'backendobject':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $object = $data->getObjectByBackendId($arguments[4]);
-            $this->_yamlOutput($cli, $arguments[4], $object);
-            break;
-        case 'create':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            switch (Horde_String::lower($arguments[4])) {
-            case 'yaml':
-                if (class_exists(\Horde\Yaml\Yaml::class)) {
-                    $object = \Horde\Yaml\Yaml::loadFile($arguments[5]);
-                } else {
-                    throw new Horde_Kolab_Cli_Exception(
-                        'The horde/yaml package is missing!'
-                    );
+            case 'info':
+                break;
+            case 'synchronize':
+                $world['storage']->getData($folder_name, $arguments[3])->synchronize();
+                break;
+            case 'stamp':
+                $cli->writeln(
+                    (string) $world['storage']->getData($folder_name)->getStamp()
+                );
+                break;
+            case 'complete':
+                $data = $world['storage']->getData($folder_name);
+                $complete = $data->fetchComplete($arguments[3]);
+                $cli->writeln($complete[1]->toString(['headers' => $complete[0]]));
+                break;
+            case 'part':
+                $data = $world['storage']->getData($folder_name);
+                $part = $data->fetchPart($arguments[3], $arguments[4]);
+                rewind($part);
+                $cli->writeln(quoted_printable_decode(stream_get_contents($part)));
+                break;
+            case 'fetch':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $objects = $data->fetch(explode(',', $arguments[4]));
+                foreach ($objects as $uid => $message) {
+                    $this->_yamlOutput($cli, $uid, $message);
                 }
-            }
-            $data->create($object);
-            $cli->writeln($object['uid']);
-            break;
-        case 'move':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $objects = $data->move($arguments[4], $arguments[5]);
-            break;
-        case 'delete':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $objects = $data->delete(explode(',', $arguments[4]));
-            break;
-        case 'deleteall':
-            $world['storage']->getData($folder_name, $arguments[3])->deleteAll();
-            break;
-        case 'deleteuids':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $objects = $data->deleteBackendIds(explode(',', $arguments[4]));
-            break;
-        case 'backendid':
-            $data = $world['storage']->getData($folder_name, $arguments[3]);
-            $cli->writeln((string)$data->getBackendId($arguments[4]));
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+                break;
+            case 'ids':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                foreach ($data->getObjectIds() as $id) {
+                    $cli->writeln((string) $id);
+                }
+                break;
+            case 'objects':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                foreach ($data->getObjects() as $id => $object) {
+                    $this->_yamlOutput($cli, $id, $object);
+                }
+                break;
+            case 'backendobjects':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                foreach ($data->getObjectsByBackendId() as $id => $object) {
+                    $this->_yamlOutput($cli, $id, $object);
+                }
+                break;
+            case 'object':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $object = $data->getObject($arguments[4]);
+                $this->_yamlOutput($cli, $arguments[4], $object);
+                break;
+            case 'backendobject':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $object = $data->getObjectByBackendId($arguments[4]);
+                $this->_yamlOutput($cli, $arguments[4], $object);
+                break;
+            case 'create':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                switch (Horde_String::lower($arguments[4])) {
+                    case 'yaml':
+                        if (class_exists(Horde\Yaml\Yaml::class)) {
+                            $object = Horde\Yaml\Yaml::loadFile($arguments[5]);
+                        } else {
+                            throw new Horde_Kolab_Cli_Exception(
+                                'The horde/yaml package is missing!'
+                            );
+                        }
+                }
+                $data->create($object);
+                $cli->writeln($object['uid']);
+                break;
+            case 'move':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $objects = $data->move($arguments[4], $arguments[5]);
+                break;
+            case 'delete':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $objects = $data->delete(explode(',', $arguments[4]));
+                break;
+            case 'deleteall':
+                $world['storage']->getData($folder_name, $arguments[3])->deleteAll();
+                break;
+            case 'deleteuids':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $objects = $data->deleteBackendIds(explode(',', $arguments[4]));
+                break;
+            case 'backendid':
+                $data = $world['storage']->getData($folder_name, $arguments[3]);
+                $cli->writeln((string) $data->getBackendId($arguments[4]));
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 
@@ -249,8 +247,8 @@ implements Horde_Kolab_Cli_Module
     private function _yamlOutput($cli, $id, $output)
     {
         $output = $this->_convertDates($output);
-        if (class_exists(\Horde\Yaml\Yaml::class)) {
-            $this->_messageOutput($cli, $id, \Horde\Yaml\Yaml::dump($output));
+        if (class_exists(Horde\Yaml\Yaml::class)) {
+            $this->_messageOutput($cli, $id, Horde\Yaml\Yaml::dump($output));
         } else {
             $this->_messageOutput($cli, $id, print_r($output, true));
         }
@@ -259,11 +257,11 @@ implements Horde_Kolab_Cli_Module
 
     private function _convertDates($output)
     {
-        $result = array();
+        $result = [];
         foreach ($output as $name => $element) {
             if (is_array($element)) {
                 $result[$name] = $this->_convertDates($element);
-            } else if ($element instanceof DateTime) {
+            } elseif ($element instanceof DateTime) {
                 $result[$name] = $element->format('c');
             } else {
                 $result[$name] = $element;

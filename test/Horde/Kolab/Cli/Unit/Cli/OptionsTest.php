@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test the options of the CLI interface.
  *
@@ -14,7 +15,7 @@
 /**
  * Test the options of the CLI interface.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -24,16 +25,16 @@
  * @subpackage UnitTests
  * @author     Gunnar Wrobel <wrobel@pardus.de>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
-class Horde_Kolab_Cli_Unit_Cli_OptionsTest
-extends Horde_Kolab_Cli_TestCase
+class Horde_Kolab_Cli_Unit_Cli_OptionsTest extends Horde_Kolab_Cli_TestCase
 {
     public function testOptionHelp()
     {
         setlocale(LC_MESSAGES, 'C');
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-h,[ ]*--help[ ]*show this help message and exit/',
             $this->runCli()
@@ -42,9 +43,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionDriver()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-d[ ]*DRIVER,[ ]*--driver=DRIVER/',
             $this->runCli()
@@ -53,9 +54,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionUser()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-u[ ]*USERNAME,[ ]*--username=USERNAME/',
             $this->runCli()
@@ -64,9 +65,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionPass()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-p[ ]*PASSWORD,[ ]*--password=PASSWORD/',
             $this->runCli()
@@ -75,9 +76,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionHost()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-H[ ]*HOST,[ ]*--host=HOST/',
             $this->runCli()
@@ -86,9 +87,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionTimed()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-t,[ ]*--timed/',
             $this->runCli()
@@ -97,9 +98,9 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testOptionLog()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/-l[ ]*LOG,[ ]*--log=LOG/',
             $this->runCli()

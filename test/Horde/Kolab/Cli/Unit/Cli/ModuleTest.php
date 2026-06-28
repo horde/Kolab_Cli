@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test the modules of the CLI interface.
  *
@@ -14,7 +15,7 @@
 /**
  * Test the modules of the CLI interface.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -24,15 +25,15 @@
  * @subpackage UnitTests
  * @author     Gunnar Wrobel <wrobel@pardus.de>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
-class Horde_Kolab_Cli_Unit_Cli_ModuleTest
-extends Horde_Kolab_Cli_TestCase
+class Horde_Kolab_Cli_Unit_Cli_ModuleTest extends Horde_Kolab_Cli_TestCase
 {
     public function testFolderModule()
     {
-        $_SERVER['argv'] = array(
-            'klb'
-        );
+        $_SERVER['argv'] = [
+            'klb',
+        ];
         $this->assertRegExp(
             '/list - Handle folder lists/',
             $this->runCli()

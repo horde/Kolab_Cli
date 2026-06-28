@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -31,7 +32,7 @@ class Horde_Kolab_Cli
      * 'output'   - (Horde_Cli) The output handler.
      * </pre>
      */
-    public static function main(array $parameters = array())
+    public static function main(array $parameters = [])
     {
         $modular = self::_prepareModular($parameters);
         if (empty($parameters['output'])) {
@@ -43,7 +44,7 @@ class Horde_Kolab_Cli
             $cli = $parameters['output'];
         }
         $parser = $modular->createParser();
-        list($options, $arguments) = $parser->parseArgs();
+        [$options, $arguments] = $parser->parseArgs();
         if (count($arguments) == 0) {
             $parser->printHelp();
         } else {
@@ -69,7 +70,7 @@ class Horde_Kolab_Cli
                 if (empty($options['driver'])) {
                     $options['driver'] = 'horde';
                 }
-                $world = array();
+                $world = [];
                 foreach ($modular->getModules() as $module) {
                     $modular->getProvider()
                         ->getModule($module)
@@ -98,23 +99,23 @@ class Horde_Kolab_Cli
         }
     }
 
-    private static function _prepareModular(array $parameters = array())
+    private static function _prepareModular(array $parameters = [])
     {
         return new Horde_Cli_Modular(
-            array(
-                'parser' => array(
+            [
+                'parser' => [
                     'class' => empty($parameters['parser']['class']) ? 'Horde_Argv_Parser' : $parameters['parser']['class'],
                     'usage' => Horde_Kolab_Cli_Translation::t(
                         "[options] MODULE ACTION\n\nPossible MODULEs and ACTIONs:\n\n"
-                    )
-                ),
-                'modules' => array(
+                    ),
+                ],
+                'modules' => [
                     'directory' => __DIR__ . '/Cli/Module',
-                ),
-                'provider' => array(
-                    'prefix' => 'Horde_Kolab_Cli_Module_'
-                )
-            )
+                ],
+                'provider' => [
+                    'prefix' => 'Horde_Kolab_Cli_Module_',
+                ],
+            ]
         );
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Data_Ledger:: class deals with ledger data.
  *
@@ -13,7 +14,7 @@
 /**
  * The Horde_Kolab_Cli_Data_Ledger:: class deals with ledger data.
  *
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -23,15 +24,14 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Data_Ledger
-implements Countable
+class Horde_Kolab_Cli_Data_Ledger implements Countable
 {
     /**
      * The ledger entries.
      *
      * @var array
      */
-    private $_entries = array();
+    private $_entries = [];
 
     /**
      * Import ledger data from a file.
@@ -53,11 +53,11 @@ implements Countable
      */
     public function asXml()
     {
-        $result = array();
+        $result = [];
         foreach ($this->_entries as $entry) {
             $entry->addAttribute('xmlns:en', 'http://newartisans.com/xml/ledger-en', 'http://www.w3.org/2000/xmlns/');
             $entry->addAttribute('xmlns:tr', 'http://newartisans.com/xml/ledger-tr', 'http://www.w3.org/2000/xmlns/');
-            $result[] = strtr($entry->asXML(), array('xmlns:xmlns="http://www.w3.org/2000/xmlns/" ' => ''));
+            $result[] = strtr($entry->asXML(), ['xmlns:xmlns="http://www.w3.org/2000/xmlns/" ' => '']);
         }
         return $result;
     }

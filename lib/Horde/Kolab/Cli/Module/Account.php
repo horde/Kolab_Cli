@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_Account:: handles operations that require a full
  * account.
@@ -15,7 +16,7 @@
  * The Horde_Kolab_Cli_Module_Account:: handles operations that require a full
  * account.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -25,8 +26,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Account
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Account implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -56,7 +56,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -96,7 +96,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -108,9 +108,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -130,117 +128,117 @@ implements Horde_Kolab_Cli_Module
             $action = $arguments[1];
         }
         switch ($action) {
-        case 'all':
-            if (!isset($arguments[2])) {
-                $folders = $world['storage']->getList()->getQuery()->listTypes();
-            } else {
-                $names = $world['storage']->getList()
-                    ->getQuery()
-                    ->listByType($arguments[2]);
-                $folders = array();
-                foreach ($names as $name) {
-                    $folders[$name] = $arguments[2];
-                }
-            }
-            foreach ($folders as $folder => $type) {
-                if ($type == 'mail') {
-                    continue;
-                }
-                $data = $world['storage']->getData($folder, $type);
-                foreach ($data->getObjects() as $id => $object) {
-                    $this->_yamlOutput($cli, $folder . ': ' . $id, $object);
-                }
-            }
-            break;
-        case 'defects':
-            if (!isset($arguments[2])) {
-                $folders = $world['storage']->getList()->getQuery()->listTypes();
-            } else {
-                $names = $world['storage']->getList()
-                    ->getQuery()
-                    ->listByType($arguments[2]);
-                $folders = array();
-                foreach ($names as $name) {
-                    $folders[$name] = $arguments[2];
-                }
-            }
-            foreach ($folders as $folder => $type) {
-                if ($type == 'mail') {
-                    continue;
-                }
-                $data = $world['storage']->getData($folder, $type);
-                foreach ($data->getErrors() as $id) {
-                    $complete = $data->fetchComplete($id);
-                    $message = "FAILED PARSING:\n\n" .
-                        $complete[1]->toString(array('headers' => $complete[0]));
-                    $this->_messageOutput($cli, $folder . ': ' . $id, $message);
-                }
-                foreach ($data->getDuplicates() as $object => $ids) {
-                    foreach ($ids as $id) {
-                        $this->_yamlOutput(
-                            $cli,
-                            "DUPLICATE $object in $folder (backend $id)",
-                            $data->fetch(array($id))
-                        );
+            case 'all':
+                if (!isset($arguments[2])) {
+                    $folders = $world['storage']->getList()->getQuery()->listTypes();
+                } else {
+                    $names = $world['storage']->getList()
+                        ->getQuery()
+                        ->listByType($arguments[2]);
+                    $folders = [];
+                    foreach ($names as $name) {
+                        $folders[$name] = $arguments[2];
                     }
                 }
-            }
-            break;
-        case 'issuelist':
-            if (!isset($arguments[2])) {
-                $folders = $world['storage']->getList()->getQuery()->listTypes();
-            } else {
-                $names = $world['storage']->getList()
-                    ->getQuery()
-                    ->listByType($arguments[2]);
-                $folders = array();
-                foreach ($names as $name) {
-                    $folders[$name] = $arguments[2];
-                }
-            }
-            foreach ($folders as $folder => $type) {
-                if ($type == 'mail') {
-                    continue;
-                }
-                $data = $world['storage']->getData($folder, $type);
-                $issues = '';
-                $errors = $data->getErrors();
-                if (!empty($errors)) {
-                    $issues = "FAILED parsing the messages with the following UIDs:\n\n";
-                    foreach ($errors as $id) {
-                        $issues .= " - $id\n";
+                foreach ($folders as $folder => $type) {
+                    if ($type == 'mail') {
+                        continue;
                     }
-                    $issues .= "\n";
+                    $data = $world['storage']->getData($folder, $type);
+                    foreach ($data->getObjects() as $id => $object) {
+                        $this->_yamlOutput($cli, $folder . ': ' . $id, $object);
+                    }
                 }
-                $duplicates = $data->getDuplicates();
-                if (!empty($duplicates)) {
-                    foreach ($duplicates as $object => $ids) {
-                        $issues .= "DUPLICATE object ID \"$object\" represented by messages with the following UIDs:\n\n";
+                break;
+            case 'defects':
+                if (!isset($arguments[2])) {
+                    $folders = $world['storage']->getList()->getQuery()->listTypes();
+                } else {
+                    $names = $world['storage']->getList()
+                        ->getQuery()
+                        ->listByType($arguments[2]);
+                    $folders = [];
+                    foreach ($names as $name) {
+                        $folders[$name] = $arguments[2];
+                    }
+                }
+                foreach ($folders as $folder => $type) {
+                    if ($type == 'mail') {
+                        continue;
+                    }
+                    $data = $world['storage']->getData($folder, $type);
+                    foreach ($data->getErrors() as $id) {
+                        $complete = $data->fetchComplete($id);
+                        $message = "FAILED PARSING:\n\n"
+                            . $complete[1]->toString(['headers' => $complete[0]]);
+                        $this->_messageOutput($cli, $folder . ': ' . $id, $message);
+                    }
+                    foreach ($data->getDuplicates() as $object => $ids) {
                         foreach ($ids as $id) {
+                            $this->_yamlOutput(
+                                $cli,
+                                "DUPLICATE $object in $folder (backend $id)",
+                                $data->fetch([$id])
+                            );
+                        }
+                    }
+                }
+                break;
+            case 'issuelist':
+                if (!isset($arguments[2])) {
+                    $folders = $world['storage']->getList()->getQuery()->listTypes();
+                } else {
+                    $names = $world['storage']->getList()
+                        ->getQuery()
+                        ->listByType($arguments[2]);
+                    $folders = [];
+                    foreach ($names as $name) {
+                        $folders[$name] = $arguments[2];
+                    }
+                }
+                foreach ($folders as $folder => $type) {
+                    if ($type == 'mail') {
+                        continue;
+                    }
+                    $data = $world['storage']->getData($folder, $type);
+                    $issues = '';
+                    $errors = $data->getErrors();
+                    if (!empty($errors)) {
+                        $issues = "FAILED parsing the messages with the following UIDs:\n\n";
+                        foreach ($errors as $id) {
                             $issues .= " - $id\n";
                         }
                         $issues .= "\n";
                     }
+                    $duplicates = $data->getDuplicates();
+                    if (!empty($duplicates)) {
+                        foreach ($duplicates as $object => $ids) {
+                            $issues .= "DUPLICATE object ID \"$object\" represented by messages with the following UIDs:\n\n";
+                            foreach ($ids as $id) {
+                                $issues .= " - $id\n";
+                            }
+                            $issues .= "\n";
+                        }
+                    }
+                    if (!empty($issues)) {
+                        $cli->writeln('Error report for folder "' . $folder . '"');
+                        $cli->writeln('================================================================================');
+                        $cli->writeln();
+                        $cli->writeln($issues);
+                        $cli->writeln('================================================================================');
+                        $cli->writeln();
+                    }
                 }
-                if (!empty($issues)) {
-                    $cli->writeln('Error report for folder "' . $folder . '"');
-                    $cli->writeln('================================================================================');
-                    $cli->writeln();
-                    $cli->writeln($issues);
-                    $cli->writeln('================================================================================');
-                    $cli->writeln();
-                }
-            }
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 
@@ -258,8 +256,8 @@ implements Horde_Kolab_Cli_Module
     private function _yamlOutput($cli, $id, $output)
     {
         $output = $this->_convertDates($output);
-        if (class_exists(\Horde\Yaml\Yaml::class)) {
-            $this->_messageOutput($cli, $id, \Horde\Yaml\Yaml::dump($output));
+        if (class_exists(Horde\Yaml\Yaml::class)) {
+            $this->_messageOutput($cli, $id, Horde\Yaml\Yaml::dump($output));
         } else {
             $this->_messageOutput($cli, $id, print_r($output, true));
         }
@@ -267,11 +265,11 @@ implements Horde_Kolab_Cli_Module
 
     private function _convertDates($output)
     {
-        $result = array();
+        $result = [];
         foreach ($output as $name => $element) {
             if (is_array($element)) {
                 $result[$name] = $this->_convertDates($element);
-            } else if ($element instanceof DateTime) {
+            } elseif ($element instanceof DateTime) {
                 $result[$name] = $element->format('c');
             } else {
                 $result[$name] = $element;

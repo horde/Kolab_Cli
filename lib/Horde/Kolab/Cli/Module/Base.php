@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_Base:: module provides the base options of the
  * Kolab CLI.
@@ -15,7 +16,7 @@
  * The Horde_Kolab_Cli_Module_Base:: module provides the base options of the
  * Kolab CLI.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -25,8 +26,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Base
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Base implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -46,14 +46,15 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array(
+        return [
             new Horde_Argv_Option(
                 '-d',
                 '--driver',
-                array(
+                [
                     'action' => 'store',
-                    'choices' => array('horde', 'horde-php', 'php', 'pear', 'roundcube', 'mock'),
-                    'help'   => Horde_Kolab_Cli_Translation::t("The Kolab backend driver that should be used.
+                    'choices' => ['horde', 'horde-php', 'php', 'pear', 'roundcube', 'mock'],
+                    'help'   => Horde_Kolab_Cli_Translation::t(
+                        "The Kolab backend driver that should be used.
 Choices are:
 
  - horde     [IMAP]: The Horde_Imap_Client driver as pure PHP implementation.
@@ -63,97 +64,97 @@ Choices are:
  - roundcube [IMAP]: The roundcube IMAP driver
  - mock      [Mem.]: A dummy driver that uses memory."
                     ),
-                )
+                ]
             ),
             new Horde_Argv_Option(
                 '-u',
                 '--username',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('The user accessing the backend.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('The user accessing the backend.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-p',
                 '--password',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('The password of the user accessing the backend.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('The password of the user accessing the backend.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-H',
                 '--host',
-                array(
+                [
                     'action' => 'store',
                     'help'   => Horde_Kolab_Cli_Translation::t('The host that holds the data.'),
-                )
+                ]
             ),
             new Horde_Argv_Option(
                 '-P',
                 '--port',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('The port that should be used to connect to the host.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('The port that should be used to connect to the host.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-S',
                 '--secure',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Sets the connection type. Use either "tls" or "ssl" here.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Sets the connection type. Use either "tls" or "ssl" here.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-t',
                 '--timed',
-                array(
+                [
                     'action' => 'store_true',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Produce time measurements to indicate how long the processing takes. You *must* activate logging for this as well.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Produce time measurements to indicate how long the processing takes. You *must* activate logging for this as well.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-m',
                 '--memory',
-                array(
+                [
                     'action' => 'store_true',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Report memory consumption statistics. You *must* activate logging for this as well.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Report memory consumption statistics. You *must* activate logging for this as well.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-n',
                 '--nocache',
-                array(
+                [
                     'action' => 'store_true',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Deactivate caching of the IMAP data.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Deactivate caching of the IMAP data.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-l',
                 '--log',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Write a log file in the provided LOG location. Use "STDOUT" here to direct the log output to the screen.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Write a log file in the provided LOG location. Use "STDOUT" here to direct the log output to the screen.'),
+                ]
             ),
             new Horde_Argv_Option(
                 '-D',
                 '--debug',
-                array(
+                [
                     'action' => 'store',
                     'help'   => Horde_Kolab_Cli_Translation::t('Activates the IMAP debug log. This will log the full IMAP communication - CAUTION: the "php" driver is the only driver variant that does not support this feature. For most drivers you should use "STDOUT" which will direct the debug log to your screen. For the horde, the horde-php, and the roundcube drivers you may also set this to a filename and the output will be directed there.'),
-                )
+                ]
             ),
             new Horde_Argv_Option(
                 '-c',
                 '--config',
-                array(
+                [
                     'action' => 'store',
-                    'help'   => Horde_Kolab_Cli_Translation::t('Path to the configuration file. Comman line parameters overwrite values from the configuration file.')
-                )
+                    'help'   => Horde_Kolab_Cli_Translation::t('Path to the configuration file. Comman line parameters overwrite values from the configuration file.'),
+                ]
             ),
-        );
+        ];
     }
 
     /**
@@ -193,7 +194,7 @@ Choices are:
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -208,7 +209,7 @@ Choices are:
     public function handleArguments(&$options, &$arguments, &$world)
     {
         if (isset($options['driver'])
-            && in_array($options['driver'], array('roundcube', 'php', 'pear'))) {
+            && in_array($options['driver'], ['roundcube', 'php', 'pear'])) {
             if (defined('E_DEPRECATED')) {
                 error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED & ~E_NOTICE);
             } else {
@@ -245,19 +246,19 @@ Choices are:
             return;
         }
         if ($options['driver'] == 'mock') {
-            $options['data'] = array(
+            $options['data'] = [
                 'format' => 'brief',
-                'user/test' => null
-            );
+                'user/test' => null,
+            ];
         }
-        $params = array(
+        $params = [
             'driver' => $options['driver'],
             'params' => $options,
-            'logger' => isset($options['log']) ? $options['log'] : null,
+            'logger' => $options['log'] ?? null,
             'timelog' => isset($options['log']) && isset($options['timed']) ? $options['log'] : null,
-        );
+        ];
         if (empty($options['nocache'])) {
-            $params['cache'] = array('prefix' => 'kolab_cache_', 'dir' => '/tmp/kolab', 'lifetime' => 0);
+            $params['cache'] = ['prefix' => 'kolab_cache_', 'dir' => '/tmp/kolab', 'lifetime' => 0];
         }
         $factory = new Horde_Kolab_Storage_Factory($params);
         return $factory->create();
@@ -273,10 +274,10 @@ Choices are:
     private function _getFormat($options)
     {
         return new Horde_Kolab_Format_Factory(
-            array(
+            [
                 'timelog' => isset($options['log']) && isset($options['timed']) ? $options['log'] : null,
                 'memlog' => isset($options['log']) && isset($options['memory']) ? $options['log'] : null,
-            )
+            ]
         );
     }
 }

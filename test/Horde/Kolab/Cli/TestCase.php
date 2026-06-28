@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Basic test case.
  *
@@ -14,7 +15,7 @@
 /**
  * Basic test case.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -24,9 +25,9 @@
  * @subpackage UnitTests
  * @author     Gunnar Wrobel <wrobel@pardus.de>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
-class Horde_Kolab_Cli_TestCase
-extends PHPUnit_Framework_TestCase
+class Horde_Kolab_Cli_TestCase extends PHPUnit_Framework_TestCase
 {
     private $_log_file;
 
@@ -41,10 +42,10 @@ extends PHPUnit_Framework_TestCase
     {
         ob_start();
         Horde_Kolab_Cli::main(
-            array(
+            [
                 'output' => new Horde_Test_Stub_Cli(),
-                'parser' => array('class' => 'Horde_Test_Stub_Parser')
-            )
+                'parser' => ['class' => 'Horde_Test_Stub_Parser'],
+            ]
         );
         $output = ob_get_contents();
         ob_end_clean();

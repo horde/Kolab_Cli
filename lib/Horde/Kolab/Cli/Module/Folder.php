@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_Folder:: class handles single folders.
  *
@@ -13,7 +14,7 @@
 /**
  * The Horde_Kolab_Cli_Module_Folder:: class handles single folders.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -23,8 +24,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Folder
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Folder implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -59,7 +59,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -99,7 +99,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -111,9 +111,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -138,97 +136,97 @@ implements Horde_Kolab_Cli_Module
             $folder_name = $arguments[2];
         }
         switch ($action) {
-        case 'create':
-            if (!isset($arguments[3])) {
+            case 'create':
+                if (!isset($arguments[3])) {
+                    $folder = $world['storage']->getList()
+                        ->createFolder($folder_name);
+                } else {
+                    $folder = $world['storage']->getList()
+                        ->createFolder($folder_name, $arguments[3]);
+                }
+                $this->_showFolder($folder_name, $world, $cli);
+                break;
+            case 'rename':
                 $folder = $world['storage']->getList()
-                    ->createFolder($folder_name);
-            } else {
+                    ->renameFolder($folder_name, $arguments[3]);
+                $this->_showFolder($arguments[3], $world, $cli);
+                break;
+            case 'delete':
                 $folder = $world['storage']->getList()
-                    ->createFolder($folder_name, $arguments[3]);
-            }
-            $this->_showFolder($folder_name, $world, $cli);
-            break;
-        case 'rename':
-            $folder = $world['storage']->getList()
-                ->renameFolder($folder_name, $arguments[3]);
-            $this->_showFolder($arguments[3], $world, $cli);
-            break;
-        case 'delete':
-            $folder = $world['storage']->getList()
-                ->deleteFolder($folder_name);
-            break;
-        case 'getacl':
-            $acl = $world['storage']->getList()
-                ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
-                ->getAcl($folder_name);
-            $cli->writeln($folder_name);
-            $cli->writeln(str_repeat('=', strlen($folder_name)));
-            $pad = max(array_map('strlen', array_keys($acl))) + 2;
-            foreach ($acl as $user => $rights) {
-                $cli->writeln(Horde_String::pad($user . ':', $pad) . $rights);
-            }
-            break;
-        case 'getmyacl':
-            $acl = $world['storage']->getList()
-                ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
-                ->getMyAcl($folder_name);
-            $cli->writeln('Your rights on ' . $folder_name . ': ' . $acl);
-            break;
-        case 'setacl':
-            $acl = $world['storage']->getList()
-                ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
-                ->setAcl($folder_name, $arguments[3], $arguments[4]);
-            break;
-        case 'deleteacl':
-            $acl = $world['storage']->getList()
-                ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
-                ->deleteAcl($folder_name, $arguments[3]);
-            break;
-        case 'getdesc':
-            $list = $world['storage']->getList();
-            $world['storage']->addListQuery(
-                $list,
-                Horde_Kolab_Storage_List::QUERY_SHARE
-            );
-            $cli->writeln(
+                    ->deleteFolder($folder_name);
+                break;
+            case 'getacl':
+                $acl = $world['storage']->getList()
+                    ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
+                    ->getAcl($folder_name);
+                $cli->writeln($folder_name);
+                $cli->writeln(str_repeat('=', strlen($folder_name)));
+                $pad = max(array_map('strlen', array_keys($acl))) + 2;
+                foreach ($acl as $user => $rights) {
+                    $cli->writeln(Horde_String::pad($user . ':', $pad) . $rights);
+                }
+                break;
+            case 'getmyacl':
+                $acl = $world['storage']->getList()
+                    ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
+                    ->getMyAcl($folder_name);
+                $cli->writeln('Your rights on ' . $folder_name . ': ' . $acl);
+                break;
+            case 'setacl':
+                $acl = $world['storage']->getList()
+                    ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
+                    ->setAcl($folder_name, $arguments[3], $arguments[4]);
+                break;
+            case 'deleteacl':
+                $acl = $world['storage']->getList()
+                    ->getQuery(Horde_Kolab_Storage_List::QUERY_ACL)
+                    ->deleteAcl($folder_name, $arguments[3]);
+                break;
+            case 'getdesc':
+                $list = $world['storage']->getList();
+                $world['storage']->addListQuery(
+                    $list,
+                    Horde_Kolab_Storage_List::QUERY_SHARE
+                );
+                $cli->writeln(
+                    $list->getQuery(Horde_Kolab_Storage_List::QUERY_SHARE)
+                        ->getDescription($folder_name)
+                );
+                break;
+            case 'setdesc':
+                $list = $world['storage']->getList();
+                $world['storage']->addListQuery(
+                    $list,
+                    Horde_Kolab_Storage_List::QUERY_SHARE
+                );
                 $list->getQuery(Horde_Kolab_Storage_List::QUERY_SHARE)
-                    ->getDescription($folder_name)
-            );
-            break;
-        case 'setdesc':
-            $list = $world['storage']->getList();
-            $world['storage']->addListQuery(
-                $list,
-                Horde_Kolab_Storage_List::QUERY_SHARE
-            );
-            $list->getQuery(Horde_Kolab_Storage_List::QUERY_SHARE)
-                ->setDescription($folder_name, $arguments[3]);
-            break;
-        case 'getshare':
-            $list = $world['storage']->getList();
-            $world['storage']->addListQuery(
-                $list,
-                Horde_Kolab_Storage_List::QUERY_SHARE
-            );
-            $parameters = $list->getQuery(Horde_Kolab_Storage_List::QUERY_SHARE)
-                ->getParameters($folder_name);
-            $pad = max(array_map('strlen', array_keys($parameters))) + 2;
-            foreach ($parameters as $key => $value) {
-                $cli->writeln(Horde_String::pad($key . ':', $pad) . $value);
-            }
-            break;
-        case 'show':
-            $this->_showFolder($folder_name, $world, $cli);
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+                    ->setDescription($folder_name, $arguments[3]);
+                break;
+            case 'getshare':
+                $list = $world['storage']->getList();
+                $world['storage']->addListQuery(
+                    $list,
+                    Horde_Kolab_Storage_List::QUERY_SHARE
+                );
+                $parameters = $list->getQuery(Horde_Kolab_Storage_List::QUERY_SHARE)
+                    ->getParameters($folder_name);
+                $pad = max(array_map('strlen', array_keys($parameters))) + 2;
+                foreach ($parameters as $key => $value) {
+                    $cli->writeln(Horde_String::pad($key . ':', $pad) . $value);
+                }
+                break;
+            case 'show':
+                $this->_showFolder($folder_name, $world, $cli);
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 

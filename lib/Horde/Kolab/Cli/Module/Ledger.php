@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Kolab_Cli_Module_Ledger:: provides tools to deal with ledger data
  * stored in a Kolab backend.
@@ -15,7 +16,7 @@
  * The Horde_Kolab_Cli_Module_Ledger:: provides tools to deal with ledger data
  * stored in a Kolab backend.
  *
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -25,8 +26,7 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Cli_Module_Ledger
-implements Horde_Kolab_Cli_Module
+class Horde_Kolab_Cli_Module_Ledger implements Horde_Kolab_Cli_Module
 {
     /**
      * Get the usage description for this module.
@@ -51,7 +51,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getBaseOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -91,7 +91,7 @@ implements Horde_Kolab_Cli_Module
      */
     public function getOptionGroupOptions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -103,9 +103,7 @@ implements Horde_Kolab_Cli_Module
      *
      * @return NULL
      */
-    public function handleArguments(&$options, &$arguments, &$world)
-    {
-    }
+    public function handleArguments(&$options, &$arguments, &$world) {}
 
     /**
      * Run the module.
@@ -125,34 +123,34 @@ implements Horde_Kolab_Cli_Module
             $action = $arguments[1];
         }
         switch ($action) {
-        case 'display':
-            $folders = $world['storage']->getList()
-                ->getQuery()
-                ->listByType('h-ledger');
-            foreach ($folders as $folder) {
-                $cli->writeln($folder);
-            }
-            break;
-            break;
-        case 'import':
-            $ledger = new Horde_Kolab_Cli_Data_Ledger();
-            $ledger->importFile($arguments[3]);
-            $data = $world['storage']->getData($arguments[2], 'h-ledger');
-            $object = array('type' => 'h-ledger');
-            foreach ($ledger->asXml() as $entry) {
-                $object['xml'] = $entry;
-                $data->create($object);
-            }
-            break;
-        default:
-            $cli->message(
-                sprintf(
-                    Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
-                    $action
-                ),
-                'cli.error'
-            );
-            break;
+            case 'display':
+                $folders = $world['storage']->getList()
+                    ->getQuery()
+                    ->listByType('h-ledger');
+                foreach ($folders as $folder) {
+                    $cli->writeln($folder);
+                }
+                break;
+                break;
+            case 'import':
+                $ledger = new Horde_Kolab_Cli_Data_Ledger();
+                $ledger->importFile($arguments[3]);
+                $data = $world['storage']->getData($arguments[2], 'h-ledger');
+                $object = ['type' => 'h-ledger'];
+                foreach ($ledger->asXml() as $entry) {
+                    $object['xml'] = $entry;
+                    $data->create($object);
+                }
+                break;
+            default:
+                $cli->message(
+                    sprintf(
+                        Horde_Kolab_Cli_Translation::t('Action %s not supported!'),
+                        $action
+                    ),
+                    'cli.error'
+                );
+                break;
         }
     }
 }

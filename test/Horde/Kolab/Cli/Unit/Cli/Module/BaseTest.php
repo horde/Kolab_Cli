@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test the base modules.
  *
@@ -14,7 +15,7 @@
 /**
  * Test the base modules.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -24,9 +25,9 @@
  * @subpackage UnitTests
  * @author     Gunnar Wrobel <wrobel@pardus.de>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
-class Horde_Kolab_Cli_Unit_Cli_Module_BaseTest
-extends Horde_Kolab_Cli_TestCase
+class Horde_Kolab_Cli_Unit_Cli_Module_BaseTest extends Horde_Kolab_Cli_TestCase
 {
     public function setUp()
     {
@@ -47,37 +48,37 @@ extends Horde_Kolab_Cli_TestCase
 
     public function testMissingNoticeWithRoundcubeDriver()
     {
-        $options = array('driver' => 'roundcube');
+        $options = ['driver' => 'roundcube'];
         $this->_handleOptions($options);
         $this->assertFalse((bool) (error_reporting() & E_NOTICE));
     }
 
     public function testMissingNoticeWithHordeDriver()
     {
-        $options = array('driver' => 'horde');
+        $options = ['driver' => 'horde'];
         $this->_handleOptions($options);
         $this->assertTrue((bool) (error_reporting() & E_NOTICE));
     }
 
     public function testLoggerOption()
     {
-        $options = array('log' => $this->getLogFile());
+        $options = ['log' => $this->getLogFile()];
         $this->_handleOptions($options);
         $this->assertContains('log', array_keys($options));
     }
 
     public function testLoggerClass()
     {
-        $options = array('log' => $this->getLogFile());
+        $options = ['log' => $this->getLogFile()];
         $this->_handleOptions($options);
         $this->assertInstanceOf('Horde_Log_Logger', $options['log']);
     }
 
     private function _handleOptions(&$options)
     {
-        $arguments = array();
+        $arguments = [];
         $base = new Horde_Kolab_Cli_Module_Base();
-        $world = array();
+        $world = [];
         $base->handleArguments($options, $arguments, $world);
     }
 
