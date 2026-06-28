@@ -1,0 +1,51 @@
+---
+1.0.0:
+  api: 1.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2026-06-28
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: "chore: refresh qc fixes and platform deps\nchore: Update workflow dependency\nrefactor: Use PSR-4 horde/yaml\nUpdate metadata and workflows for PHP 8 support\nAdd CI job for satis repo update\nAdd warning against using this master branch for patches\nRegenerate composer.json\nUpdate supported PHP versions and configuration names.\nAdd chomp character.\nEnable PHP 7.3 CI.\nUpdate package definitions.\nFix getting exit code on PHP 7.2+.\nCreate CHANGES for all components.\nBuild changelog.yml from existing changelog(s).\nUpdate .horde.yml with extended information.\nUpdate composer.json.\nEnable 7.2 builds.\nPEAR on 5.6 and 7.0 is fixed.\nUpdate file list\nMove phpunit configuration to base directory.\nIndicate markup language.\nUpdate references to COPYING files.\nUse LICENSE consistently and move to base directory.\nStop flooding #horde channel.\nUse https URLs.\nRemove incorrect links.\nInstall all dependencies but PECL extensions.\nHopefully this finally fixes Travis builds now.\nAlways discover channel manually, due to Travis bug.\nFix Travis tests.\nAdd Travis configuration and .gitignore files.\nAdd type parameter to .horde.yml files.\nUpdate composer information.\nUpdated composer definitions.\nRename horde.yml files.\nStandardize library full names.\nGenerate horde.yml files for all components.\nHappy New Year!\nUse HTTPS.\nAdd or remove replacement tasks where necessary.\nNow that all tests pass on PHP 7, bump supported PHP version at least for all packages that have tests.\nHappy New Year!\nUpdated\nCS: Lowercase php keywords (especially instanceof / implements / extends)\nUpdated\nBFN\nphpdoc\nUse Horde_String's locale-independent methods.\nHappy New Year!\nRequiring Horde_Translation for packages missing them Composer or PEAR.\nAuto detecting locale directory, removing lots overloading of methods that aren't needed anymore.\nUse 'static' keyword in the correct order as per PSR-2.\nExclude BC breaking PHP versions.\nHappy New Year!\nAdd composer.json to packages/libraries\nUpdate es translation.\nUpdate pt_BR translation.\nUpdate eu translation.\nFix getFolder() call.\nHappy New Year!\nUpdate eu translation.\nAdd/update Horde_Test dependencies.\nSetup tests without requiring any modification of Horde_Test glue files.\nUpdate ja translation.\nStable versions.\nUpdate ja translation.\nBump minimum versions to beta1.\nClean up the rest of the dependencies for Horde 5\nUpdate dep versions for Browser, Cache, Cli, Cli_Modular, Compress, Controller\nUpdate dep versions for Horde_Autoloader\nExclude pre-releases of higher major versions too.\nFix next version.\nDevelopment mode for Horde_Kolab_Cli-2.0.0beta1"
+1.0.0beta1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2017-10-20
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[jan] Mark PHP 7 as supported.\n[jan] Fix issues with certain locales like Turkish.\n[jan] Add Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).\n"
+1.0.0alpha3:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2012-07-05
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "First alpha release for Horde 5.\n"
+1.0.0alpha2:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2012-04-10
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[jan] Add Spanish translation (Manuel P. Ayala <mayala@unex.es>).\n"
+1.0.0alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-12-17
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "First alpha release for Horde 4.\n"

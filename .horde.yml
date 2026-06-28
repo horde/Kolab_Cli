@@ -15,10 +15,10 @@ authors:
     active: true
     role: lead
 version:
-  release: 1.0.0beta1
+  release: 1.0.0
   api: 1.0.0
 state:
-  release: alpha
+  release: stable
   api: alpha
 license:
   identifier: LGPL-2.1-only
@@ -44,46 +44,67 @@ keywords: null
 vendor: horde
 ci-platform:
   '8.0':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.1':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.2':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.3':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.4':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.5':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
   '8.6':
-    - php: ^7.4 || ^8
-    - composer-plugin-api: ~2.0
+    - php: '>=7.2'
+    - composer-plugin-api: ^2.2.0
     - ext-dom
     - ext-hash
     - ext-json
+    - ext-pcre
+    - ext-simplexml
+    - ext-spl
 ci-platform-flags:
-  needs_installer_plugin: false
+  needs_installer_plugin: true
